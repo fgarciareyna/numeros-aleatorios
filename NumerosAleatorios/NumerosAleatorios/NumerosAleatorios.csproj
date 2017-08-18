@@ -40,9 +40,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CongruencialMixto.cs" />
-    <Compile Include="CongruencialMultiplicativo.cs" />
+    <Compile Include="NumerosAleatorios\CongruencialMixto.cs" />
+    <Compile Include="NumerosAleatorios\CongruencialMultiplicativo.cs" />
+    <Compile Include="NumerosAleatorios\GeneradorDelSistema.cs" />
+    <Compile Include="NumerosAleatorios\IGeneradorNumerosAleatorios.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VariablesAleatorias\DistribucionUniforme.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
