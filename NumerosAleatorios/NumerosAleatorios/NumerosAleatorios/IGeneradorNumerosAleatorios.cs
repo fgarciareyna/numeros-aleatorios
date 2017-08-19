@@ -1,4 +1,4 @@
-﻿namespace NumerosAleatorios
+﻿namespace NumerosAleatorios.NumerosAleatorios
 {
     public interface IGeneradorNumerosAleatorios
     {

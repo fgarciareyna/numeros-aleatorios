@@ -1,11 +1,9 @@
 ﻿using System;
 
-namespace NumerosAleatorios
+namespace NumerosAleatorios.NumerosAleatorios
 {
      public class GeneradorDelSistema : IGeneradorNumerosAleatorios
     {
-
-
         public double Generar()
         {
             var aleatorio = new Random().NextDouble();
@@ -17,7 +15,7 @@ namespace NumerosAleatorios
         {
             var aleatorio = Generar();
 
-            return (int)(aleatorio * (10 ^ cifras));
+            return (int)(aleatorio * Math.Pow(10, cifras));
         }
     }
 }

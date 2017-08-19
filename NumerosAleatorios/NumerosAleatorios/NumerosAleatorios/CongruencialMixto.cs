@@ -1,4 +1,6 @@
-﻿namespace NumerosAleatorios
+﻿using System;
+
+namespace NumerosAleatorios.NumerosAleatorios
 {
     public class CongruencialMixto : IGeneradorNumerosAleatorios
     {
@@ -28,7 +30,7 @@
         {
             var aleatorio = Generar();
 
-            return (int) (aleatorio * (10 ^ cifras));
+            return (int) (aleatorio * Math.Pow(10, cifras));
         }
     }
 }

@@ -45,7 +45,10 @@
     <Compile Include="NumerosAleatorios\GeneradorDelSistema.cs" />
     <Compile Include="NumerosAleatorios\IGeneradorNumerosAleatorios.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VariablesAleatorias\DistribucionExponencialNegativa.cs" />
+    <Compile Include="VariablesAleatorias\DistribucionNormal.cs" />
     <Compile Include="VariablesAleatorias\DistribucionUniforme.cs" />
+    <Compile Include="VariablesAleatorias\IDistribucion.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

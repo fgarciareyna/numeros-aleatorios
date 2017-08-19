@@ -1,25 +1,23 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using NumerosAleatorios.NumerosAleatorios;
 
 namespace NumerosAleatorios.VariablesAleatorias
 {
-    public class DistribucionUniforme : IDistribucion
+    public class DistribucionExponencialNegativa : IDistribucion
     {
-        public double A { get; protected set; }
-        public double B { get; protected set; }
+        public double Lambda { get; protected set; }
         public IGeneradorNumerosAleatorios Generador { get; protected set; }
 
-        public DistribucionUniforme(double a, double b)
+        public DistribucionExponencialNegativa(double lambda)
         {
-            A = a;
-            B = b;
+            Lambda = lambda;
             Generador = new GeneradorDelSistema();
         }
 
-        public DistribucionUniforme(double a, double b, IGeneradorNumerosAleatorios generador)
+        public DistribucionExponencialNegativa(double lambda, IGeneradorNumerosAleatorios generador)
         {
-            A = a;
-            B = b;
+            Lambda = lambda;
             Generador = generador;
         }
 
@@ -30,9 +28,10 @@ namespace NumerosAleatorios.VariablesAleatorias
 
         public double Generar()
         {
+            //x=-1/lambda*ln(1-r1)
             var aleatorio = Generador.Generar();
 
-            var variable = A + aleatorio * (B - A);
+            var variable = -1 / (Lambda * Math.Log(1 - aleatorio));
 
             return variable;
         }
