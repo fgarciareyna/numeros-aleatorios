@@ -49,7 +49,7 @@ namespace NumerosAleatorios.VariablesAleatorias
             return variables;
         }
 
-        public List<double> FrecuenciaEsperada(List<Intervalo> intervalos)
+        public List<double> FrecuenciasEsperadas(List<Intervalo> intervalos)
         {
             var frecuencias = new List<double>(intervalos.Count);
 

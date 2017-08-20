@@ -4,8 +4,8 @@ namespace NumerosAleatorios
 {
     public class Intervalo
     {
-        public double Inicio { get; protected set; }
-        public double Fin { get; protected set; }
+        public double Inicio { get; set; }
+        public double Fin { get; set; }
 
         public Intervalo(double inicio, double fin)
         {
