@@ -8,5 +8,7 @@ namespace NumerosAleatorios.VariablesAleatorias
         void AsignarGenerador(IGeneradorNumerosAleatorios generador);
         double Generar();
         List<double> Generar(int cantidad);
+        List<double> FrecuenciaEsperada(List<Intervalo> intervalos);
+        int CantidadParametros();
     }
 }

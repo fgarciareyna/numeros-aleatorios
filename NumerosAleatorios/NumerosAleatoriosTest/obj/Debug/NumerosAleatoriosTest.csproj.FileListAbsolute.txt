@@ -1,0 +1,9 @@
+C:\Users\Cundo\Desktop\UTN\SIM\Prácticos\TP1\numeros-aleatorios\NumerosAleatorios\NumerosAleatoriosTest\bin\Debug\NumerosAleatoriosTest.dll
+C:\Users\Cundo\Desktop\UTN\SIM\Prácticos\TP1\numeros-aleatorios\NumerosAleatorios\NumerosAleatoriosTest\bin\Debug\NumerosAleatoriosTest.pdb
+C:\Users\Cundo\Desktop\UTN\SIM\Prácticos\TP1\numeros-aleatorios\NumerosAleatorios\NumerosAleatoriosTest\bin\Debug\Meta.Numerics.dll
+C:\Users\Cundo\Desktop\UTN\SIM\Prácticos\TP1\numeros-aleatorios\NumerosAleatorios\NumerosAleatoriosTest\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Users\Cundo\Desktop\UTN\SIM\Prácticos\TP1\numeros-aleatorios\NumerosAleatorios\NumerosAleatoriosTest\bin\Debug\Meta.Numerics.xml
+C:\Users\Cundo\Desktop\UTN\SIM\Prácticos\TP1\numeros-aleatorios\NumerosAleatorios\NumerosAleatoriosTest\bin\Debug\es\Microsoft.VisualStudio.QualityTools.UnitTestFramework.resources.dll
+C:\Users\Cundo\Desktop\UTN\SIM\Prácticos\TP1\numeros-aleatorios\NumerosAleatorios\NumerosAleatoriosTest\obj\Debug\NumerosAleatoriosTest.csprojResolveAssemblyReference.cache
+C:\Users\Cundo\Desktop\UTN\SIM\Prácticos\TP1\numeros-aleatorios\NumerosAleatorios\NumerosAleatoriosTest\obj\Debug\NumerosAleatoriosTest.dll
+C:\Users\Cundo\Desktop\UTN\SIM\Prácticos\TP1\numeros-aleatorios\NumerosAleatorios\NumerosAleatoriosTest\obj\Debug\NumerosAleatoriosTest.pdb
