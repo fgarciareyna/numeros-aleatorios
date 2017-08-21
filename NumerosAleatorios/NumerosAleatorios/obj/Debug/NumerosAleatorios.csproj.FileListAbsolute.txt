@@ -1,1 +1,7 @@
 C:\Users\Cundo\Desktop\UTN\SIM\Prácticos\TP1\numeros-aleatorios\NumerosAleatorios\NumerosAleatorios\obj\Debug\NumerosAleatorios.csprojResolveAssemblyReference.cache
+C:\Users\Cundo\Desktop\UTN\SIM\Prácticos\TP1\numeros-aleatorios\NumerosAleatorios\NumerosAleatorios\bin\Debug\NumerosAleatorios.dll
+C:\Users\Cundo\Desktop\UTN\SIM\Prácticos\TP1\numeros-aleatorios\NumerosAleatorios\NumerosAleatorios\bin\Debug\NumerosAleatorios.pdb
+C:\Users\Cundo\Desktop\UTN\SIM\Prácticos\TP1\numeros-aleatorios\NumerosAleatorios\NumerosAleatorios\bin\Debug\Meta.Numerics.dll
+C:\Users\Cundo\Desktop\UTN\SIM\Prácticos\TP1\numeros-aleatorios\NumerosAleatorios\NumerosAleatorios\bin\Debug\Meta.Numerics.xml
+C:\Users\Cundo\Desktop\UTN\SIM\Prácticos\TP1\numeros-aleatorios\NumerosAleatorios\NumerosAleatorios\obj\Debug\NumerosAleatorios.dll
+C:\Users\Cundo\Desktop\UTN\SIM\Prácticos\TP1\numeros-aleatorios\NumerosAleatorios\NumerosAleatorios\obj\Debug\NumerosAleatorios.pdb

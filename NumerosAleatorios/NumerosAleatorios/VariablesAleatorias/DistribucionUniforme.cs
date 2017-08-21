@@ -65,7 +65,7 @@ namespace NumerosAleatorios.VariablesAleatorias
             return frecuencias;
         }
 
-        public int CantidadParametros(int muestra)
+        public int CantidadParametros()
         {
             return 2;
         }

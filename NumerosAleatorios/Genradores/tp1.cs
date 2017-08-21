@@ -14,13 +14,10 @@ namespace Genradores
         private IGeneradorNumerosAleatorios _generadorAleatorio;
         private const int TamañoMuestra = 20;
         private const int Cifras = 4;
-        int x;
-        int x0;
         int ord;
         bool error = false;
         int intervalos;
         subIntervalos[] sub_intervalos; //vector de subintervalos
-        double chi;
         readonly List<double> _lista = new List<double>();
 
         public Tp1()
@@ -396,14 +393,14 @@ namespace Genradores
         /// VER Falta
         private void btn_compro_Click(object sender, EventArgs e)
         {
-            if (chi < double.Parse(txt_chicierto.Text))
+            /*if (chi < double.Parse(txt_chicierto.Text))
             {
                 MessageBox.Show(@"Se acepta la hipótesis");
             }
             else
             {
                 MessageBox.Show(@"Se rechaza la hipótesis");
-            }
+            }*/
         }
     }
 }
