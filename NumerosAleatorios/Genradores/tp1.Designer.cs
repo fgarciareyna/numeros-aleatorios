@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.posicion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.numero = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -72,6 +72,11 @@
             this.txt_semillaC = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.intervalo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.frecuencia = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.frecuenciaEsp = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FORelativa = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ChiCuadrado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.histogramaGenerado = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
@@ -82,11 +87,6 @@
             this.lbl_chi_cu = new System.Windows.Forms.Label();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.lblFrecuenciaEsperada = new System.Windows.Forms.Label();
-            this.intervalo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.frecuencia = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.frecuenciaEsp = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FORelativa = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ChiCuadrado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox4.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -550,37 +550,63 @@
             this.dataGridView2.Size = new System.Drawing.Size(597, 207);
             this.dataGridView2.TabIndex = 37;
             // 
+            // intervalo
+            // 
+            this.intervalo.HeaderText = "Intervalo";
+            this.intervalo.Name = "intervalo";
+            this.intervalo.Width = 150;
+            // 
+            // frecuencia
+            // 
+            this.frecuencia.HeaderText = "Frecuencia Observada";
+            this.frecuencia.Name = "frecuencia";
+            // 
+            // frecuenciaEsp
+            // 
+            this.frecuenciaEsp.HeaderText = "Frecuencia Esperada";
+            this.frecuenciaEsp.Name = "frecuenciaEsp";
+            // 
+            // FORelativa
+            // 
+            this.FORelativa.HeaderText = "Frec Obs. Relativa";
+            this.FORelativa.Name = "FORelativa";
+            // 
+            // ChiCuadrado
+            // 
+            this.ChiCuadrado.HeaderText = "Prueba Chi Cuadrado";
+            this.ChiCuadrado.Name = "ChiCuadrado";
+            // 
             // histogramaGenerado
             // 
-            chartArea3.AxisX.ArrowStyle = System.Windows.Forms.DataVisualization.Charting.AxisArrowStyle.Lines;
-            chartArea3.AxisX.IntervalAutoMode = System.Windows.Forms.DataVisualization.Charting.IntervalAutoMode.VariableCount;
-            chartArea3.AxisX.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Number;
-            chartArea3.AxisX.MajorGrid.LineColor = System.Drawing.Color.Silver;
-            chartArea3.AxisX.Title = "Intervalos";
-            chartArea3.AxisX.TitleAlignment = System.Drawing.StringAlignment.Far;
-            chartArea3.AxisY.ArrowStyle = System.Windows.Forms.DataVisualization.Charting.AxisArrowStyle.Lines;
-            chartArea3.AxisY.IntervalAutoMode = System.Windows.Forms.DataVisualization.Charting.IntervalAutoMode.VariableCount;
-            chartArea3.AxisY.MajorGrid.LineColor = System.Drawing.Color.Silver;
-            chartArea3.AxisY.Maximum = 100D;
-            chartArea3.AxisY.Minimum = 0D;
-            chartArea3.AxisY.ScaleView.SizeType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Number;
-            chartArea3.AxisY.Title = "Frecuencia";
-            chartArea3.AxisY.TitleAlignment = System.Drawing.StringAlignment.Far;
-            chartArea3.Name = "ChartArea1";
-            this.histogramaGenerado.ChartAreas.Add(chartArea3);
-            legend3.Enabled = false;
-            legend3.Name = "Legend1";
-            this.histogramaGenerado.Legends.Add(legend3);
+            chartArea1.AxisX.ArrowStyle = System.Windows.Forms.DataVisualization.Charting.AxisArrowStyle.Lines;
+            chartArea1.AxisX.IntervalAutoMode = System.Windows.Forms.DataVisualization.Charting.IntervalAutoMode.VariableCount;
+            chartArea1.AxisX.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Number;
+            chartArea1.AxisX.MajorGrid.LineColor = System.Drawing.Color.Silver;
+            chartArea1.AxisX.Title = "Intervalos";
+            chartArea1.AxisX.TitleAlignment = System.Drawing.StringAlignment.Far;
+            chartArea1.AxisY.ArrowStyle = System.Windows.Forms.DataVisualization.Charting.AxisArrowStyle.Lines;
+            chartArea1.AxisY.IntervalAutoMode = System.Windows.Forms.DataVisualization.Charting.IntervalAutoMode.VariableCount;
+            chartArea1.AxisY.MajorGrid.LineColor = System.Drawing.Color.Silver;
+            chartArea1.AxisY.Maximum = 100D;
+            chartArea1.AxisY.Minimum = 0D;
+            chartArea1.AxisY.ScaleView.SizeType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Number;
+            chartArea1.AxisY.Title = "Frecuencia";
+            chartArea1.AxisY.TitleAlignment = System.Drawing.StringAlignment.Far;
+            chartArea1.Name = "ChartArea1";
+            this.histogramaGenerado.ChartAreas.Add(chartArea1);
+            legend1.Enabled = false;
+            legend1.Name = "Legend1";
+            this.histogramaGenerado.Legends.Add(legend1);
             this.histogramaGenerado.Location = new System.Drawing.Point(14, 29);
             this.histogramaGenerado.Name = "histogramaGenerado";
             this.histogramaGenerado.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
-            series3.ChartArea = "ChartArea1";
-            series3.Color = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            series3.IsValueShownAsLabel = true;
-            series3.IsXValueIndexed = true;
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            this.histogramaGenerado.Series.Add(series3);
+            series1.ChartArea = "ChartArea1";
+            series1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            series1.IsValueShownAsLabel = true;
+            series1.IsXValueIndexed = true;
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.histogramaGenerado.Series.Add(series1);
             this.histogramaGenerado.Size = new System.Drawing.Size(692, 311);
             this.histogramaGenerado.TabIndex = 36;
             this.histogramaGenerado.Text = "chart1";
@@ -636,6 +662,7 @@
             this.txt_chicierto.Name = "txt_chicierto";
             this.txt_chicierto.Size = new System.Drawing.Size(60, 19);
             this.txt_chicierto.TabIndex = 35;
+            this.txt_chicierto.Text = "0.05";
             // 
             // label4
             // 
@@ -691,33 +718,7 @@
             this.lblFrecuenciaEsperada.Size = new System.Drawing.Size(0, 13);
             this.lblFrecuenciaEsperada.TabIndex = 0;
             // 
-            // intervalo
-            // 
-            this.intervalo.HeaderText = "Intervalo";
-            this.intervalo.Name = "intervalo";
-            this.intervalo.Width = 150;
-            // 
-            // frecuencia
-            // 
-            this.frecuencia.HeaderText = "Frecuencia Observada";
-            this.frecuencia.Name = "frecuencia";
-            // 
-            // frecuenciaEsp
-            // 
-            this.frecuenciaEsp.HeaderText = "Frecuencia Esperada";
-            this.frecuenciaEsp.Name = "frecuenciaEsp";
-            // 
-            // FORelativa
-            // 
-            this.FORelativa.HeaderText = "Frec Obs. Relativa";
-            this.FORelativa.Name = "FORelativa";
-            // 
-            // ChiCuadrado
-            // 
-            this.ChiCuadrado.HeaderText = "Prueba Chi Cuadrado";
-            this.ChiCuadrado.Name = "ChiCuadrado";
-            // 
-            // tp1
+            // Tp1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;

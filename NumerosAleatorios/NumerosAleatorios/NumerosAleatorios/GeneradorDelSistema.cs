@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 
 namespace NumerosAleatorios.NumerosAleatorios
 {
@@ -6,6 +7,8 @@ namespace NumerosAleatorios.NumerosAleatorios
     {
         public double Generar()
         {
+            Thread.Sleep(20); // Para que la semilla sea distinta
+
             var aleatorio = new Random().NextDouble();
 
             return aleatorio;
