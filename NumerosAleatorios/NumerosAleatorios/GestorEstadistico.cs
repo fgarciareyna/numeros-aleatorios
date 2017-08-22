@@ -112,8 +112,8 @@ namespace NumerosAleatorios
 
             for (var i = 0; i < CantidadIntervalos; i++)
             {
-                var observada = FrecuenciasObservadasRelativas[i];
-                var esperada = FrecuenciasEsperadasRelativas[i];
+                var observada = FrecuenciasObservadasAbsolutas[i];
+                var esperada = FrecuenciasEsperadasAbsolutas[i];
 
                 var valor = ChiCuadrado.Calcular(observada, esperada);
 
@@ -125,7 +125,7 @@ namespace NumerosAleatorios
 
         public void ObtenerValorDeTablaChiCuadrado()
         {
-            var grados = TamañoMuestra - Distribucion.CantidadParametros() - 1;
+            var grados = CantidadIntervalos - Distribucion.CantidadParametros() - 1;
 
             var valor = ChiCuadrado.ValorDeTabla(grados, Alfa);
 

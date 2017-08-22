@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 using NumerosAleatorios;
@@ -12,13 +12,11 @@ namespace Genradores
     public partial class Tp1 : Form
     {
         private IGeneradorNumerosAleatorios _generadorAleatorio;
+        private GestorEstadistico _gestor;
         private const int TamañoMuestra = 20;
         private const int Cifras = 4;
-        int ord;
-        bool error = false;
-        int intervalos;
-        subIntervalos[] sub_intervalos; //vector de subintervalos
-        readonly List<double> _lista = new List<double>();
+        private const int Decimales = 3;
+        private int _ord;
 
         public Tp1()
         {
@@ -32,8 +30,7 @@ namespace Genradores
 
         private void btn_PuntoA_Click(object sender, EventArgs e)
         {
-            ValidarTextoA();
-            if (error == false)
+            if (FormularioValidoA())
             {
                 GenerarNumerosA();
                 btn_siguiente.Enabled = true;
@@ -41,46 +38,40 @@ namespace Genradores
             }
         }
 
-        private void ValidarTextoA()
+        private bool FormularioValidoA()
         {
-            error = false;
             if (string.IsNullOrEmpty(txt_semillaA.Text))
             {
                 MessageBox.Show(@"Ingrese un valor de semilla");
-                error = true;
                 txt_semillaA.Focus();
-                return;
+                return false;
             }
             if (string.IsNullOrEmpty(txt_aA.Text))
             {
                 MessageBox.Show(@"Ingrese un valor de A");
-                error = true;
                 txt_aA.Focus();
-                return;
+                return false;
             }
-            if (radioButton1.Checked)
+            if (radioButton1.Checked && string.IsNullOrEmpty(txt_cA.Text))
             {
-                if (string.IsNullOrEmpty(txt_cA.Text))
-                {
-                    MessageBox.Show(@"Ingrese un valor de C");
-                    error = true;
-                    txt_cA.Focus();
-                    return;
-                }
+                MessageBox.Show(@"Ingrese un valor de C");
+                txt_cA.Focus();
+                return false;
             }
             if (string.IsNullOrEmpty(txt_mA.Text))
             {
                 MessageBox.Show(@"Ingrese un valor de M");
-                error = true;
                 txt_mA.Focus();
+                return false;
             }
+
+            return true;
         }
 
         public void GenerarNumerosA()
         {
-            _lista.Clear();
             dataGridView1.Rows.Clear();
-            ord = 0;
+            _ord = 0;
 
             var a = int.Parse(txt_aA.Text);
             var m = int.Parse(txt_mA.Text);
@@ -102,25 +93,16 @@ namespace Genradores
             for (var i = 0; i < TamañoMuestra; i++)
             {
                 var aleatorio = _generadorAleatorio.Generar(Cifras);
-                ord++;
-                dataGridView1.Rows.Add(ord, aleatorio);
-                _lista.Add(aleatorio);
+                _ord++;
+                dataGridView1.Rows.Add(_ord, aleatorio);
             }
-        }
-
-        public double TruncateFunction(double number, int digits) //0,65412 4
-        {
-            double stepper = (double) (Math.Pow(10.0, (double) digits)); //10000
-            int temp = (int) (stepper * number); //6541
-            return (double) temp / stepper; //6541.2 / 10000
         }
 
         private void btn_siguiente_Click_1(object sender, EventArgs e)
         {
             var aleatorio = _generadorAleatorio.Generar(Cifras);
-            ord++;
-            dataGridView1.Rows.Add(ord, aleatorio);
-            _lista.Add(aleatorio);
+            _ord++;
+            dataGridView1.Rows.Add(_ord, aleatorio);
         }
 
         private void LimpiarDatosA()
@@ -145,7 +127,7 @@ namespace Genradores
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
             txt_cA.Enabled = false;
-            groupBox3.Enabled = false;
+            groupBox3.Enabled = true;
             btn_siguiente.Enabled = false;
             LimpiarDatosA();
             txt_semillaA.Focus();
@@ -155,115 +137,121 @@ namespace Genradores
 
         private void btn_PuntoB_Click(object sender, EventArgs e)
         {
-            ValidarTextoB();
-            if (error == false)
+            if (FormularioValidoB())
             {
-                GenerarPuntoB();
+                GenerarNumerosB();
             }
         }
 
-        private void ValidarTextoB()
+        private bool FormularioValidoB()
         {
-            error = false;
             if (string.IsNullOrEmpty(txt_Cant_nroB.Text))
             {
                 MessageBox.Show(@"Ingrese el tamaño de la muestra");
-                error = true;
                 txt_Cant_nroB.Focus();
-                return;
+                return false;
             }
             if (string.IsNullOrEmpty(txt_IntB.Text))
             {
                 MessageBox.Show(@"Ingrese la cantidad de intervalos");
-                error = true;
                 txt_IntB.Focus();
+                return false;
             }
+            if (string.IsNullOrEmpty(txt_chicierto.Text))
+            {
+                MessageBox.Show(@"Ingrese un valor de alfa");
+                txt_chicierto.Focus();
+                return false;
+            }
+
+            return true;
         }
 
-        public void GenerarPuntoB()
+        public void GenerarNumerosB()
         {
-            _lista.Clear();
             dataGridView1.Rows.Clear();
-            ord = 0;
+            _ord = 0;
 
             var tamañoMuestra = int.Parse(txt_Cant_nroB.Text);
             var cantidadIntervalos = int.Parse(txt_IntB.Text);
             var alfa = double.Parse(txt_chicierto.Text);
 
             var distribucion = new DistribucionUniforme(0, 1);
-            var generador = new GestorEstadistico(distribucion, tamañoMuestra, cantidadIntervalos, alfa);
+            _gestor = new GestorEstadistico(distribucion, tamañoMuestra, cantidadIntervalos, alfa);
 
-            foreach (var valor in generador.Valores)
+            foreach (var valor in _gestor.Valores)
             {
-                ord++;
-                dataGridView1.Rows.Add(ord, valor);
-                _lista.Add(valor);
+                _ord++;
+                dataGridView1.Rows.Add(_ord, valor);
             }
+
+            AgregarValoresTabla();
+            CargarHistograma();
         }
 
         ////////////////     Punto C     ////////////////
 
         private void btn_PuntoC_Click(object sender, EventArgs e)
         {
-            ValidarTextoC();
-            if (error == false)
+            if (FormularioValidoC())
             {
                 GenerarNumerosC();
             }
         }
 
-        private void ValidarTextoC()
+        private bool FormularioValidoC()
         {
-            error = false;
             if (string.IsNullOrEmpty(txt_cant_nroC.Text))
             {
                 MessageBox.Show(@"Ingrese el tamaño de la muestra");
-                error = true;
                 txt_cant_nroC.Focus();
-                return;
+                return false;
             }
             if (string.IsNullOrEmpty(txt_IntC.Text))
             {
                 MessageBox.Show(@"Ingrese la cantidad de intervalos");
-                error = true;
                 txt_IntC.Focus();
-                return;
+                return false;
             }
             if (string.IsNullOrEmpty(txt_semillaC.Text))
             {
                 MessageBox.Show(@"Ingrese un valor de semilla");
-                error = true;
                 txt_semillaC.Focus();
-                return;
+                return false;
             }
             if (string.IsNullOrEmpty(txt_aC.Text))
             {
                 MessageBox.Show(@"Ingrese un valor de A");
-                error = true;
                 txt_aC.Focus();
-                return;
+                return false;
             }
             if (string.IsNullOrEmpty(txt_cC.Text))
             {
                 MessageBox.Show(@"Ingrese un valor de C");
-                error = true;
                 txt_cC.Focus();
-                return;
+                return false;
             }
             if (string.IsNullOrEmpty(txt_mC.Text))
             {
                 MessageBox.Show(@"Ingrese un valor de M");
-                error = true;
                 txt_mC.Focus();
+                return false;
             }
+            if (string.IsNullOrEmpty(txt_chicierto.Text))
+            {
+                MessageBox.Show(@"Ingrese un valor de alfa");
+                txt_chicierto.Focus();
+                return false;
+            }
+
+            return true;
         }
 
         public void GenerarNumerosC()
         {
             //Congruencial Mixto : Xn = (A * Xn-1 + C ) Mod M
-            _lista.Clear();
             dataGridView1.Rows.Clear();
-            ord = 0;
+            _ord = 0;
 
             var c = int.Parse(txt_cC.Text);
             var a = int.Parse(txt_aC.Text);
@@ -277,37 +265,37 @@ namespace Genradores
             var alfa = double.Parse(txt_chicierto.Text);
 
             var distribucion = new DistribucionUniforme(0, 1, _generadorAleatorio);
-            var generador = new GestorEstadistico(distribucion, tamañoMuestra, cantidadIntervalos, alfa);
+            _gestor = new GestorEstadistico(distribucion, tamañoMuestra, cantidadIntervalos, alfa);
 
-            foreach (var valor in generador.Valores)
+            foreach (var valor in _gestor.Valores)
             {
-                ord++;
-                dataGridView1.Rows.Add(ord, valor);
-                _lista.Add(valor);
+                _ord++;
+                dataGridView1.Rows.Add(_ord, valor);
             }
+
+            AgregarValoresTabla();
+            CargarHistograma();
         }
 
         ////////////////     Grafico     ////////////////
 
         private void btn_graficarB_Click(object sender, EventArgs e)
         {
-            ValidarTextoB();
-            if (error == false)
+            /*if (FormularioValidoB())
             {
                 dataGridView1.Rows.Clear();
                 ord = 0;
                 _lista.Clear();
-                GenerarPuntoB();
+                GenerarNumerosB();
                 intervalos = int.Parse(txt_IntB.Text);
                 CargarHistograma();
                 AgregarValoresTabla();
-            }
+            }*/
         }
 
         private void btn_graficarC_Click_1(object sender, EventArgs e)
         {
-            ValidarTextoC();
-            if (error == false)
+            /*if (FormularioValidoC())
             {
                 dataGridView1.Rows.Clear();
                 ord = 0;
@@ -316,91 +304,73 @@ namespace Genradores
                 intervalos = int.Parse(txt_IntC.Text);
                 CargarHistograma();
                 AgregarValoresTabla();
+            }*/
+        }
+
+        private void AgregarValoresTabla()
+        {
+            // Agregar Valores en la Tabla
+            dataGridView2.Rows.Clear();
+
+            for (var i = 0; i < _gestor.CantidadIntervalos; i++)
+            {
+                var subint = $"{decimal.Round((decimal)_gestor.Intervalos[i].Inicio, Decimales)} - " +
+                             $"{decimal.Round((decimal)_gestor.Intervalos[i].Fin, Decimales)}";
+                var freObs = _gestor.FrecuenciasObservadasAbsolutas[i];
+                var freEsp = decimal.Round((decimal)_gestor.FrecuenciasEsperadasAbsolutas[i], Decimales);
+                var freObsRel = decimal.Round((decimal)_gestor.FrecuenciasObservadasRelativas[i], Decimales);
+                //var freEspRel = decimal.Round((decimal)_gestor.FrecuenciasEsperadasRelativas[i], Decimales);
+                var chiCuad = decimal.Round((decimal)_gestor.ValoresChiCuadrado[i], Decimales);
+
+                dataGridView2.Rows.Add(subint, freObs, freEsp, freObsRel, chiCuad);
             }
+
+            lbl_chi_cu.Text = decimal.Round((decimal)_gestor.ValoresChiCuadrado.Sum(), Decimales)
+                .ToString(CultureInfo.InvariantCulture);
+
+            lblFrecuenciaEsperada.Text = decimal.Round((decimal) _gestor.TablaChiCuadrado, Decimales)
+                .ToString(CultureInfo.InvariantCulture);
+
+            btn_compro.Enabled = true;
         }
 
         private void CargarHistograma()
         {
-            //creo los subintervalos del histograma
-            sub_intervalos = new subIntervalos[intervalos];
-
-            for (int i = 0; i < intervalos; i++)
-            {
-                if (i == 0)
-                    sub_intervalos[i] = new subIntervalos(0, ((float) 1 / intervalos) * (i + 1));
-                else
-                {
-                    sub_intervalos[i] = new subIntervalos(sub_intervalos[i - 1].LimiteSuperior,
-                        ((float) 1 / intervalos) * (i + 1));
-                }
-            }
-
-            //ahora recorremos la lista para calcular las frecuencias.
-            for (int i = 0; i < _lista.Count; i++)
-            {
-                for (int j = 0; j < sub_intervalos.Length; j++)
-                {
-                    if (_lista[i] >= sub_intervalos[j].LimiteInferior && _lista[i] <= sub_intervalos[j].LimiteSuperior)
-                    {
-                        sub_intervalos[j].CantidadObservaciones++;
-                    }
-                }
-            }
-
-            //limpiamos el chart y preparamos el nuevo histograma
-            List<int> listaEnteros = new List<int>();
-                //lista para acumular las cantidades de cada intervalo y luego poder obtener el MAX()
             histogramaGenerado.Series.Clear();
             histogramaGenerado.Series.Add("Frecuecias Observadas");
+            histogramaGenerado.Series.Add("Frecuecias Esperadas");
 
-
-            for (int i = 0; i < intervalos; i++)
+            for (var i = 0; i < _gestor.CantidadIntervalos; i++)
             {
-                listaEnteros.Add(sub_intervalos[i].CantidadObservaciones);
-                histogramaGenerado.Series[0].Points.Add(sub_intervalos[i].CantidadObservaciones);
-                histogramaGenerado.Series[0].Points[i].AxisLabel = "[" + sub_intervalos[i].LimiteInferior + " - " +
-                                                                   sub_intervalos[i].LimiteSuperior + "]";
+                histogramaGenerado.Series[0].Points.Add(_gestor.FrecuenciasObservadasAbsolutas[i]);
+                histogramaGenerado.Series[1].Points.Add(
+                    (double)decimal.Round((decimal)_gestor.FrecuenciasEsperadasAbsolutas[i], Decimales));
+                histogramaGenerado.Series[0].Points[i].AxisLabel = 
+                    $"[{decimal.Round((decimal)_gestor.Intervalos[i].Inicio, Decimales)} - " +
+                    $"{decimal.Round((decimal)_gestor.Intervalos[i].Fin, Decimales)}]";
                 histogramaGenerado.Series[0].IsValueShownAsLabel = true;
-            }
-            double cantidadObservaciones = double.Parse(_lista.Count.ToString());
-            histogramaGenerado.ChartAreas[0].AxisY.Maximum = listaEnteros.Max();
-            double freEsperada = (double) cantidadObservaciones / (double) intervalos;
-            lblFrecuenciaEsperada.Text = freEsperada.ToString();
-            histogramaGenerado.Series["Frecuecias Observadas"].Color = Color.Fuchsia;
-        }
-
-        void AgregarValoresTabla()
-        {
-            // Agregar Valores en la Tabla
-            double sumaChi = 0;
-            dataGridView2.Rows.Clear();
-            for (int i = 0; i < sub_intervalos.Length; i++)
-            {
-                string subint = sub_intervalos[i].LimiteInferior + " - " + sub_intervalos[i].LimiteSuperior;
-                double freEsp = _lista.Count / intervalos;
-                var FORelativa = (double) sub_intervalos[i].CantidadObservaciones / (double) _lista.Count;
-                var feRelativa = 1 / (double) intervalos;
-                var ChiCuadrado = Math.Pow(feRelativa - FORelativa, 2) / feRelativa;
-                sumaChi = sumaChi + ChiCuadrado;
-
-                dataGridView2.Rows.Add(subint, sub_intervalos[i].CantidadObservaciones, freEsp, FORelativa, ChiCuadrado);
+                histogramaGenerado.Series[1].IsValueShownAsLabel = true;
             }
 
-            lbl_chi_cu.Text = Convert.ToString(sumaChi);
-            btn_compro.Enabled = true;
+            histogramaGenerado.ChartAreas[0].AxisY.Maximum = _gestor.FrecuenciasObservadasAbsolutas.Max();
+
+            histogramaGenerado.Series[0].Color = Color.Blue;
+            histogramaGenerado.Series[1].Color = Color.Red;
         }
 
-        /// VER Falta
         private void btn_compro_Click(object sender, EventArgs e)
         {
-            /*if (chi < double.Parse(txt_chicierto.Text))
+            var chiObtenido = _gestor.ValoresChiCuadrado.Sum();
+            var chiEsperado = _gestor.TablaChiCuadrado;
+
+            if (chiObtenido < chiEsperado)
             {
                 MessageBox.Show(@"Se acepta la hipótesis");
             }
             else
             {
                 MessageBox.Show(@"Se rechaza la hipótesis");
-            }*/
+            }
         }
     }
 }
