@@ -2,5 +2,8 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/NumerosAleatorios/Genradores/bin/Debug
-/NumerosAleatorios/Genradores/obj/Debug
+/NumerosAleatorios/Genradores/bin/
+/NumerosAleatorios/Genradores/obj/
+/NumerosAleatorios/NumerosAleatorios/bin/
+/NumerosAleatorios/packages/
+/NumerosAleatorios/NumerosAleatorios/obj/
