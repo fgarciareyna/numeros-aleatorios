@@ -2,12 +2,13 @@
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 using NumerosAleatorios;
 using NumerosAleatorios.NumerosAleatorios;
 using NumerosAleatorios.VariablesAleatorias;
 
-namespace Genradores
+namespace Generadores
 {
     public partial class Tp1 : Form
     {
@@ -20,6 +21,10 @@ namespace Genradores
 
         public Tp1()
         {
+            var culture = CultureInfo.InvariantCulture;
+            Thread.CurrentThread.CurrentCulture = culture;
+            Thread.CurrentThread.CurrentUICulture = culture;
+
             InitializeComponent();
             btn_siguiente.Enabled = false;
             btn_compro.Enabled = false;

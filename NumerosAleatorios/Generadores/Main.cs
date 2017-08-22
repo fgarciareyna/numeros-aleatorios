@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace Genradores
+namespace Generadores
 {
     public partial class Main : Form
     {

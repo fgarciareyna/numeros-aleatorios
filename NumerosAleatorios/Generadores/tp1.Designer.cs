@@ -1,4 +1,4 @@
-﻿namespace Genradores
+﻿namespace Generadores
 {
     partial class Tp1
     {
