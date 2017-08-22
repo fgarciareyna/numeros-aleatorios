@@ -40,28 +40,40 @@ namespace Genradores
 
         private bool FormularioValidoA()
         {
-            if (string.IsNullOrEmpty(txt_semillaA.Text))
+            int semilla;
+            int a;
+            int c;
+            int m;
+
+            if (!int.TryParse(txt_mA.Text, out m) ||
+                m <= 0)
             {
-                MessageBox.Show(@"Ingrese un valor de semilla");
+                MessageBox.Show(@"El valor de M debe ser un entero positivo");
+                txt_mA.Focus();
+                return false;
+            }
+
+            if (!int.TryParse(txt_semillaA.Text, out semilla) ||
+                semilla <= 0 || semilla >= m)
+            {
+                MessageBox.Show(@"El valor de semilla debe ser un entero positivo menor a M");
                 txt_semillaA.Focus();
                 return false;
             }
-            if (string.IsNullOrEmpty(txt_aA.Text))
+
+            if (!int.TryParse(txt_aA.Text, out a) ||
+                a <= 0 || a >= m)
             {
-                MessageBox.Show(@"Ingrese un valor de A");
+                MessageBox.Show(@"El valor de A debe ser un entero positivo menor a M");
                 txt_aA.Focus();
                 return false;
             }
-            if (radioButton1.Checked && string.IsNullOrEmpty(txt_cA.Text))
+
+            if (radioButton1.Checked && (!int.TryParse(txt_cA.Text, out c) ||
+                c <= 0 || c >= m))
             {
-                MessageBox.Show(@"Ingrese un valor de C");
+                MessageBox.Show(@"El valor de C debe ser un entero positivo menor a M");
                 txt_cA.Focus();
-                return false;
-            }
-            if (string.IsNullOrEmpty(txt_mA.Text))
-            {
-                MessageBox.Show(@"Ingrese un valor de M");
-                txt_mA.Focus();
                 return false;
             }
 
@@ -70,8 +82,7 @@ namespace Genradores
 
         public void GenerarNumerosA()
         {
-            dataGridView1.Rows.Clear();
-            _ord = 0;
+            LimpiarTablas();
 
             var a = int.Parse(txt_aA.Text);
             var m = int.Parse(txt_mA.Text);
@@ -115,11 +126,24 @@ namespace Genradores
             btn_PuntoA.Enabled = true;
         }
 
+        private void LimpiarTablas()
+        {
+            _ord = 0;
+            dataGridView1.Rows.Clear();
+            dataGridView2.Rows.Clear();
+            histogramaGenerado.Series.Clear();
+
+            lbl_chi_cu.Text = "";
+            lblFrecuenciaEsperada.Text = "";
+
+            btn_compro.Enabled = false;
+        }
+
         private void radioButton1_CheckedChanged_1(object sender, EventArgs e)
         {
             txt_cA.Enabled = true;
-            groupBox3.Enabled = true;
-            btn_siguiente.Enabled = true;
+            //groupBox3.Enabled = true;
+            btn_siguiente.Enabled = false;
             LimpiarDatosA();
             txt_semillaA.Focus();
         }
@@ -127,7 +151,7 @@ namespace Genradores
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
             txt_cA.Enabled = false;
-            groupBox3.Enabled = true;
+            //groupBox3.Enabled = true;
             btn_siguiente.Enabled = false;
             LimpiarDatosA();
             txt_semillaA.Focus();
@@ -145,21 +169,30 @@ namespace Genradores
 
         private bool FormularioValidoB()
         {
-            if (string.IsNullOrEmpty(txt_Cant_nroB.Text))
+            int muestra;
+            int intervalos;
+            double alfa;
+
+            if (!int.TryParse(txt_Cant_nroB.Text, out muestra)
+                || muestra <= 0)
             {
-                MessageBox.Show(@"Ingrese el tamaño de la muestra");
+                MessageBox.Show(@"El tamaño de la muestra debe ser un entero positivo");
                 txt_Cant_nroB.Focus();
                 return false;
             }
-            if (string.IsNullOrEmpty(txt_IntB.Text))
+
+            if (!int.TryParse(txt_IntB.Text, out intervalos)
+                || intervalos <= 0)
             {
-                MessageBox.Show(@"Ingrese la cantidad de intervalos");
+                MessageBox.Show(@"La cantidad de intervalos debe ser un entero positivo");
                 txt_IntB.Focus();
                 return false;
             }
-            if (string.IsNullOrEmpty(txt_chicierto.Text))
+
+            if (!double.TryParse(txt_chicierto.Text, out alfa)
+                || alfa <= 0 || alfa >= 1)
             {
-                MessageBox.Show(@"Ingrese un valor de alfa");
+                MessageBox.Show(@"El valor de alfa debe estar entre 0 y 1");
                 txt_chicierto.Focus();
                 return false;
             }
@@ -169,8 +202,7 @@ namespace Genradores
 
         public void GenerarNumerosB()
         {
-            dataGridView1.Rows.Clear();
-            _ord = 0;
+            LimpiarTablas();
 
             var tamañoMuestra = int.Parse(txt_Cant_nroB.Text);
             var cantidadIntervalos = int.Parse(txt_IntB.Text);
@@ -201,46 +233,68 @@ namespace Genradores
 
         private bool FormularioValidoC()
         {
-            if (string.IsNullOrEmpty(txt_cant_nroC.Text))
+            int muestra;
+            int intervalos;
+            double alfa;
+
+            if (!int.TryParse(txt_cant_nroC.Text, out muestra)
+                || muestra <= 0)
             {
-                MessageBox.Show(@"Ingrese el tamaño de la muestra");
-                txt_cant_nroC.Focus();
+                MessageBox.Show(@"El tamaño de la muestra debe ser un entero positivo");
+                txt_Cant_nroB.Focus();
                 return false;
             }
-            if (string.IsNullOrEmpty(txt_IntC.Text))
+
+            if (!int.TryParse(txt_IntC.Text, out intervalos)
+                || intervalos <= 0)
             {
-                MessageBox.Show(@"Ingrese la cantidad de intervalos");
-                txt_IntC.Focus();
+                MessageBox.Show(@"La cantidad de intervalos debe ser un entero positivo");
+                txt_IntB.Focus();
                 return false;
             }
-            if (string.IsNullOrEmpty(txt_semillaC.Text))
+
+            if (!double.TryParse(txt_chicierto.Text, out alfa)
+                || alfa <= 0 || alfa >= 1)
             {
-                MessageBox.Show(@"Ingrese un valor de semilla");
-                txt_semillaC.Focus();
-                return false;
-            }
-            if (string.IsNullOrEmpty(txt_aC.Text))
-            {
-                MessageBox.Show(@"Ingrese un valor de A");
-                txt_aC.Focus();
-                return false;
-            }
-            if (string.IsNullOrEmpty(txt_cC.Text))
-            {
-                MessageBox.Show(@"Ingrese un valor de C");
-                txt_cC.Focus();
-                return false;
-            }
-            if (string.IsNullOrEmpty(txt_mC.Text))
-            {
-                MessageBox.Show(@"Ingrese un valor de M");
-                txt_mC.Focus();
-                return false;
-            }
-            if (string.IsNullOrEmpty(txt_chicierto.Text))
-            {
-                MessageBox.Show(@"Ingrese un valor de alfa");
+                MessageBox.Show(@"El valor de alfa debe estar entre 0 y 1");
                 txt_chicierto.Focus();
+                return false;
+            }
+
+            int semilla;
+            int a;
+            int c;
+            int m;
+
+            if (!int.TryParse(txt_mC.Text, out m) ||
+                m <= 0)
+            {
+                MessageBox.Show(@"El valor de M debe ser un entero positivo");
+                txt_mA.Focus();
+                return false;
+            }
+
+            if (!int.TryParse(txt_semillaC.Text, out semilla) ||
+                semilla <= 0 || semilla >= m)
+            {
+                MessageBox.Show(@"El valor de semilla debe ser un entero positivo menor a M");
+                txt_semillaA.Focus();
+                return false;
+            }
+
+            if (!int.TryParse(txt_aC.Text, out a) ||
+                a <= 0 || a >= m)
+            {
+                MessageBox.Show(@"El valor de A debe ser un entero positivo menor a M");
+                txt_aA.Focus();
+                return false;
+            }
+
+            if (radioButton1.Checked && (!int.TryParse(txt_cC.Text, out c) ||
+                c <= 0 || c >= m))
+            {
+                MessageBox.Show(@"El valor de C debe ser un entero positivo menor a M");
+                txt_cA.Focus();
                 return false;
             }
 
@@ -250,8 +304,7 @@ namespace Genradores
         public void GenerarNumerosC()
         {
             //Congruencial Mixto : Xn = (A * Xn-1 + C ) Mod M
-            dataGridView1.Rows.Clear();
-            _ord = 0;
+            LimpiarTablas();
 
             var c = int.Parse(txt_cC.Text);
             var a = int.Parse(txt_aC.Text);
@@ -277,41 +330,8 @@ namespace Genradores
             CargarHistograma();
         }
 
-        ////////////////     Grafico     ////////////////
-
-        private void btn_graficarB_Click(object sender, EventArgs e)
-        {
-            /*if (FormularioValidoB())
-            {
-                dataGridView1.Rows.Clear();
-                ord = 0;
-                _lista.Clear();
-                GenerarNumerosB();
-                intervalos = int.Parse(txt_IntB.Text);
-                CargarHistograma();
-                AgregarValoresTabla();
-            }*/
-        }
-
-        private void btn_graficarC_Click_1(object sender, EventArgs e)
-        {
-            /*if (FormularioValidoC())
-            {
-                dataGridView1.Rows.Clear();
-                ord = 0;
-                _lista.Clear();
-                GenerarNumerosC();
-                intervalos = int.Parse(txt_IntC.Text);
-                CargarHistograma();
-                AgregarValoresTabla();
-            }*/
-        }
-
         private void AgregarValoresTabla()
         {
-            // Agregar Valores en la Tabla
-            dataGridView2.Rows.Clear();
-
             for (var i = 0; i < _gestor.CantidadIntervalos; i++)
             {
                 var subint = $"{decimal.Round((decimal)_gestor.Intervalos[i].Inicio, Decimales)} - " +
@@ -319,10 +339,10 @@ namespace Genradores
                 var freObs = _gestor.FrecuenciasObservadasAbsolutas[i];
                 var freEsp = decimal.Round((decimal)_gestor.FrecuenciasEsperadasAbsolutas[i], Decimales);
                 var freObsRel = decimal.Round((decimal)_gestor.FrecuenciasObservadasRelativas[i], Decimales);
-                //var freEspRel = decimal.Round((decimal)_gestor.FrecuenciasEsperadasRelativas[i], Decimales);
+                var freEspRel = decimal.Round((decimal)_gestor.FrecuenciasEsperadasRelativas[i], Decimales);
                 var chiCuad = decimal.Round((decimal)_gestor.ValoresChiCuadrado[i], Decimales);
 
-                dataGridView2.Rows.Add(subint, freObs, freEsp, freObsRel, chiCuad);
+                dataGridView2.Rows.Add(subint, freObs, freEsp, freObsRel, freEspRel, chiCuad);
             }
 
             lbl_chi_cu.Text = decimal.Round((decimal)_gestor.ValoresChiCuadrado.Sum(), Decimales)
@@ -336,7 +356,6 @@ namespace Genradores
 
         private void CargarHistograma()
         {
-            histogramaGenerado.Series.Clear();
             histogramaGenerado.Series.Add("Frecuecias Observadas");
             histogramaGenerado.Series.Add("Frecuecias Esperadas");
 
@@ -363,14 +382,11 @@ namespace Genradores
             var chiObtenido = _gestor.ValoresChiCuadrado.Sum();
             var chiEsperado = _gestor.TablaChiCuadrado;
 
-            if (chiObtenido < chiEsperado)
-            {
-                MessageBox.Show(@"Se acepta la hipótesis");
-            }
-            else
-            {
-                MessageBox.Show(@"Se rechaza la hipótesis");
-            }
+            var mensaje = chiObtenido < chiEsperado 
+                ? "Se acepta la hipótesis" 
+                : "Se rechaza la hipótesis";
+
+            MessageBox.Show(mensaje);
         }
     }
 }
